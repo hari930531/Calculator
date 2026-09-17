@@ -34,11 +34,9 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
+       stage('Build Docker Image') {
             steps {
-                echo "Building Docker Image..."
-                bat "docker build -t %APP_NAME%:latest ."
-                // Use 'sh' instead of 'bat' if Jenkins is on Linux
+               bat '''"C:\\Users\\ADMIN\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" build -t calculator-app:latest .'''
             }
         }
 
@@ -46,11 +44,10 @@ pipeline {
             steps {
                 echo "Deploying Docker Container..."
                 bat '''
-                    docker stop %APP_NAME% 2>nul || ver >nul
-                    docker rm %APP_NAME% 2>nul || ver >nul
-                    docker run -d -p %PORT%:80 --name %APP_NAME% %APP_NAME%:latest
+                    "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" stop %APP_NAME% 2>nul || ver >nul
+                    "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" rm %APP_NAME% 2>nul || ver >nul
+                    "C:\\Users\\ADMIN\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin\\docker.exe" run -d -p %PORT%:80 --name %APP_NAME% %APP_NAME%:latest
                 '''
-                // Use 'sh' instead of 'bat' if Jenkins is on Linux
             }
         }
 
